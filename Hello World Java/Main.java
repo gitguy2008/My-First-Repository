@@ -1,20 +1,24 @@
 import java.time.LocalTime;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class Main {
 
     public static void main(String[] args) {
-        Name totallyRadName1 = new Name("Connor", "Hacker90");
-        Name totallyRadName2 = new Name("Cheesy", "Sock");
-        Name totallyRadName3 = new Name("Parham", "Rostami");
-        
-        greetUser(totallyRadName1);
-        greetUser(totallyRadName2);
-        greetUser(totallyRadName3);
+        List<Name> users = Arrays.asList(
+            new Name("Connor", "Hacker90"),
+            new Name("Cheesy", "Sock"),
+            new Name("Parham", "Rostami")
+        );
+
+        users.forEach(Main::greetUser);
     }
 
     private static void greetUser(Name user) {
         String greeting = getGreetingMessage();
-        System.out.println(greeting + " " + user.getFullName() + "!");
+        String compliment = getRandomCompliment();
+        System.out.println(greeting + " " + user.getFullName() + "! " + compliment);
     }
 
     private static String getGreetingMessage() {
@@ -32,18 +36,16 @@ public class Main {
         }
     }
 
-    // Assuming the Name class looks something like this
-    static class Name {
-        private String firstName;
-        private String nickname;
-
-        public Name(String firstName, String nickname) {
-            this.firstName = firstName;
-            this.nickname = nickname;
-        }
-
-        public String getFullName() {
-            return firstName + " \"" + nickname + "\"";
-        }
+    private static String getRandomCompliment() {
+        List<String> compliments = Arrays.asList(
+            "You're a genius!",
+            "Keep being awesome!",
+            "Your energy is contagious!",
+            "You're an absolute legend!",
+            "That was an epic move!"
+        );
+        Random random = new Random();
+        return compliments.get(random.nextInt(compliments.size()));
     }
+
 }
